@@ -40,10 +40,11 @@ pip install torchcfm
 ```
 
 ### Reference
-
+```
 @article{he2025feat,
   title={FEAT: Free energy Estimators with Adaptive Transport},
   author={He*, Jiajun and Du*, Yuanqi and Vargas, Francisco and Wang, Yuanqing and Gomes, Carla P and Hern{\'a}ndez-Lobato, Jos{\'e} Miguel and Vanden-Eijnden, Eric},
   journal={arXiv preprint arXiv:2504.11516},
   year={2025}
 }
+```
