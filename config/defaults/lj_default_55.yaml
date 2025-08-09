@@ -1,0 +1,57 @@
+device: 'cuda'
+
+method: 'FM'
+
+target:
+  dim: 165
+  lj1:
+    n_dim: 3
+    n_particles: 55
+    sample_path: data/LJ_55_mbar_samples_0.0000.pkl
+    scale: 0.0
+  lj2:
+    n_dim: 3
+    n_particles: 55
+    sample_path: data/LJ_55_mbar_samples_1.0000.pkl
+    scale: 1.0
+  name: lj
+
+network:
+  name: 'egnn'
+  learn_b: true
+  score_net:
+    num_layer: 4
+    num_hid: 64
+    clip: 10000
+  vector_field:
+    num_layer: 4
+    num_hid: 64
+    clip: 10000
+  cutoff: null
+
+coef:
+  alpha: '1-t'
+  beta: 't'
+  gamma: 'sqrt(a*t*(1-t))+b'
+  b: 0
+  a: 0.05
+  eps: 0.01
+
+train:
+  lr: 0.001
+  num_epoch: 100000
+  batch_size: 100
+  OT_pair: false
+  ema_rate: 0.995
+  
+  finetune: false
+
+sample:
+  num_step: 500
+  
+save:
+  save_dir: "results"
+  eval_batch: 20
+  eval_div: true
+  eval_gap: 50000
+  eval_sample: 1000

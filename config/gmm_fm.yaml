@@ -1,0 +1,9 @@
+default: ./defaults/gmm_default_40D.yaml
+
+method: 'FM'
+
+save:
+  eval_div: true
+  eval_gap: 50000
+  eval_sample: 5000
+  eval_batch: 1000

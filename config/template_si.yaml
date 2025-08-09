@@ -1,0 +1,11 @@
+default: ./defaults/your-default-yaml.yaml
+
+method: 'SI'
+
+
+train:
+  finetune: false
+  pretrain_ckpt: ""
+  finetune_vector_field: true
+  finetune_score_net: true
+

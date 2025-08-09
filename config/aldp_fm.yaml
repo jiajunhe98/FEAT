@@ -1,0 +1,6 @@
+default: ./defaults/aldp_default.yaml
+
+method: 'FM'
+
+save:
+  eval_div: true

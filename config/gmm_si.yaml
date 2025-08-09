@@ -1,0 +1,10 @@
+default: ./defaults/gmm_default_40D.yaml
+
+method: 'SI'
+
+
+train:
+  finetune: false
+  pretrain_ckpt: ""
+  finetune_vector_field: true
+  finetune_score_net: true

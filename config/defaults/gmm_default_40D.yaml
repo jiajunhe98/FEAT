@@ -1,0 +1,56 @@
+
+device: 'cuda'
+
+target:
+  name: "gmm"
+  dim: 40
+  gmm1:
+    num_gaussian: 40
+    loc: 2.0
+    scale: -2.
+    shift: 0
+    seed: 0
+  gmm2:
+    num_gaussian: 16
+    loc: 2.0
+    scale: -3.0
+    shift: 0
+    seed: 10
+
+network:
+  name: 'mlp'
+  learn_b: true
+  score_net:
+    num_layer: 5
+    num_hid: 400
+    clip: 10000
+  vector_field:
+    num_layer: 5
+    num_hid: 400
+    clip: 10000
+
+coef:
+  alpha: '1-t'
+  beta: 't'
+  gamma: 'sqrt(a*t*(1-t))+b'
+  b: 0
+  a: 0.05
+  eps: 0.01
+
+train:
+  lr: 0.001
+  num_epoch: 50000
+  batch_size: 1000
+  OT_pair: false
+  ema_rate: 0.995
+
+  finetune: false
+
+sample:
+  num_step: 500
+
+save:
+  save_dir: "results"
+  eval_gap: 1000
+  eval_sample: 5000
+  eval_batch: 1000

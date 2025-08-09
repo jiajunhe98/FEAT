@@ -1,10 +1,18 @@
-# FEAT Code
+# FEAT: Free energy Estimators with Adaptive Transport
 
 
-Please put the data in ```data/``` folder. As an example, you can download the dataset we use for ALDP-S and LJ55/79 at [this anonymous drive link](https://drive.google.com/drive/folders/1Ujsjp7qNR3qwPcqWVrX5lORB7CM8fK_o?usp=sharing).
 
 
-Then, run
+🚧 Under construction and coming soon:
+- instruction for environment installation
+
+
+### Data preparation
+
+Please put the data in ```data/``` folder.
+
+
+### Run FEAT
 
 ```
 python main_train.py --config gmm_si > log.txt
@@ -31,4 +39,11 @@ For experiments with OT plan, please install ```torchcfm``` package via
 pip install torchcfm
 ```
 
-"# FEAT" 
+### Reference
+
+@article{he2025feat,
+  title={FEAT: Free energy Estimators with Adaptive Transport},
+  author={He*, Jiajun and Du*, Yuanqi and Vargas, Francisco and Wang, Yuanqing and Gomes, Carla P and Hern{\'a}ndez-Lobato, Jos{\'e} Miguel and Vanden-Eijnden, Eric},
+  journal={arXiv preprint arXiv:2504.11516},
+  year={2025}
+}

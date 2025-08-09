@@ -1,0 +1,68 @@
+device: 'cuda'
+
+method: 'FM'
+
+target:
+  aldp1:
+    env: implicit
+    lambd: 0.0
+    n_dim: 3
+    n_particles: 22
+    n_threads: 8
+    sample_path: data/aldp_0.0_align_p1.pt
+    scaling: 20.0
+    score_path: data/aldp_0.0_align_grad_p1.pkl
+    temperature: 300
+  aldp2:
+    env: implicit
+    lambd: 0.0
+    n_dim: 3
+    n_particles: 22
+    n_threads: 8
+    sample_path: data/aldp_0.0_align_p2.pt
+    scaling: 20.0
+    score_path: data/aldp_0.0_align_grad_p2.pkl
+    temperature: 300
+  dim: 66
+  name: aldp
+
+network:
+  name: 'egnn'
+  learn_b: true
+  score_net:
+    num_layer: 4
+    num_hid: 64
+    clip: 10000
+    energy_param: true
+  vector_field:
+    num_layer: 4
+    num_hid: 64
+    clip: 10000
+  cutoff: null
+
+coef:
+  alpha: '1-t'
+  beta: 't'
+  gamma: 'sqrt(a*t*(1-t))+b'
+  b: 0
+  a: 0.05
+  eps: 0.01
+
+train:
+  lr: 0.001
+  num_epoch: 30000
+  batch_size: 100
+  OT_pair: true
+  ema_rate: 0.995
+  
+  finetune: false
+
+sample:
+  num_step: 500
+  
+save:
+  save_dir: "results"
+  eval_gap: 5000
+  eval_sample: 10
+  eval_batch: 10
+  eval_div: false
