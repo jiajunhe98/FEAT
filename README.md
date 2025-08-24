@@ -5,7 +5,7 @@
 
 🚧 Under construction and coming soon:
 - instruction for environment installation
-- Half-side interpolant and FEAT for DeepBAR
+- Code for Half-side interpolant and FEAT for DeepBAR
 
 
 
