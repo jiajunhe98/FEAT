@@ -6,6 +6,7 @@
 🚧 Under construction and coming soon:
 - instruction for environment installation
 - Code for Half-side interpolant and FEAT for DeepBAR
+- Data release
 
 
 
