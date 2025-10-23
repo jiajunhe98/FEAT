@@ -1,5 +1,5 @@
 # FEAT: Free energy Estimators with Adaptive Transport
-
+**NeurIPS 2025**
 
 
 
@@ -7,6 +7,8 @@
 - instruction for environment installation
 - Code for Half-side interpolant and FEAT for DeepBAR
 - Data release
+
+We aim to finish construction soon. If you have any questions regarding the experiments, please feel free to reach out!
 
 
 
