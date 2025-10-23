@@ -1,19 +1,10 @@
 <div align="left">
-
 **NeurIPS 2025**
-
 </div>
-
 <h1 align="center">FEAT: Free energy Estimators with Adaptive Transport</h1>
-
-<div align="center">
-  <img src="feat-arxiv-badge.svg" alt="arXiv:2501.01234" width="170">
-</div>
-
 <div align="left">
-
 Jiajun He*, Yuanqi Du*, Francisco Vargas, Carla P. Gomes, José Miguel Hernández-Lobato, Eric Vanden-Eijnden  
-
+  
 *Equal Contribution
 </div>
 
