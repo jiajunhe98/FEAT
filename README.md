@@ -1,5 +1,8 @@
-# FEAT: Free energy Estimators with Adaptive Transport
-**NeurIPS 2025**
+<p align="center">
+  <b>NeurIPS 2025</b><br>
+  <h1>FEAT: Free energy Estimators with Adaptive Transport</h1>
+  <img src="feat-arxiv-badge.svg" alt="arXiv:2501.01234" width="180">
+</p>
 
 
 
