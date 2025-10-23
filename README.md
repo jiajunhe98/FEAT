@@ -9,11 +9,33 @@
 
 
 ### 🚧 Under construction and coming soon:
-- instruction for environment installation
 - Code for Half-side interpolant and FEAT for DeepBAR
 - Data release
 
 We aim to finish construction soon. If you have any questions regarding the experiments, please feel free to reach out!
+
+
+
+### Environment
+
+Our implementation is based on [PyTorch](https://pytorch.org/). After setting up PyTorch, please install the following dependencies:
+After preparing the environment with torch, please also install the following packages:
+
+```
+# Core molecular simulation libraries
+conda install -c conda-forge openmm openmmtools
+
+# Normalizing flow and Boltzmann generator components
+pip install normflows
+pip install git+https://github.com/VincentStimper/boltzmann-generators.git
+
+# Conditional flow matching library
+pip install torchcfm
+
+```
+Finally, install bgflow manually from the official repository: [https://github.com/noegroup/bgflow](https://github.com/noegroup/bgflow).
+
+
 
 
 
@@ -31,23 +53,6 @@ python main_train.py --config gmm_si > log.txt
 hyparameters can be set in ```config/defaults/xxx.yaml```.
 
 
-
-### Env
-
-Our code is implemented in ```pytorch```. After preparing the environment with torch, please also install openmm and other dependencies
-
-```
-conda install -c conda-forge openmm openmmtools
-pip install normflows
-pip install git+https://github.com/VincentStimper/boltzmann-generators.git
-```
-and install bgflow at [https://github.com/noegroup/bgflow](https://github.com/noegroup/bgflow).
-
-For experiments with OT plan, please install ```torchcfm``` package via
-
-```
-pip install torchcfm
-```
 
 ### Reference
 ```
