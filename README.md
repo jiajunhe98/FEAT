@@ -54,6 +54,7 @@ hyparameters can be set in ```config/defaults/your-config.yaml```.
 ### Coming soon:
 - Code for Half-side interpolant
 
+### Support and Contact
 If you have any questions, please feel free to reach out at jh2383@cam.ac.uk
 
 
