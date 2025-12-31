@@ -8,18 +8,15 @@
 
 
 
-### 🚧 Under construction and coming soon:
-- Code for Half-side interpolant and FEAT for DeepBAR
-- Data release
 
-We aim to finish construction soon. If you have any questions regarding the experiments, please feel free to reach out!
 
 
 
 ### Environment
 
-Our implementation is based on [PyTorch](https://pytorch.org/). After setting up PyTorch, please install the following dependencies:
-After preparing the environment with torch, please also install the following packages:
+Our implementation is based on [PyTorch](https://pytorch.org/). Torch ```2.9.1+cu128``` works well; other versions may also be compatible..
+
+After setting up PyTorch, please install the following dependencies:
 
 ```
 # Core molecular simulation libraries
@@ -41,7 +38,7 @@ Finally, install bgflow manually from the official repository: [https://github.c
 
 ### Data preparation
 
-Please put the data in ```data/``` folder.
+Please put the data in ```data/``` folder.  Along with our code, we also release the dataset we used in our paper at [https://huggingface.co/datasets/JJHE/FEAT/](https://huggingface.co/datasets/JJHE/FEAT/). We have aligned each sample to a reference configuration to help with the mini-batch OT pairing.
 
 
 ### Run FEAT
@@ -50,7 +47,14 @@ Please put the data in ```data/``` folder.
 python main_train.py --config gmm_si > log.txt
 ```
 
-hyparameters can be set in ```config/defaults/xxx.yaml```.
+hyparameters can be set in ```config/defaults/your-config.yaml```.
+
+
+
+### Coming soon:
+- Code for Half-side interpolant
+
+If you have any questions, please feel free to reach out at jh2383@cam.ac.uk
 
 
 
