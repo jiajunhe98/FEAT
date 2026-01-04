@@ -12,7 +12,7 @@
 
 
 
-### Environment
+### ⚙️ Environment
 
 Our implementation is based on [PyTorch](https://pytorch.org/). Torch ```2.9.1+cu128``` works well; other versions may also be compatible..
 
@@ -36,12 +36,12 @@ Finally, install bgflow manually from the official repository: [https://github.c
 
 
 
-### Data preparation
+### 📁 Data preparation
 
 Please put the data in ```data/``` folder.  Along with our code, we also release the dataset we used in our paper at [https://huggingface.co/datasets/JJHE/FEAT/](https://huggingface.co/datasets/JJHE/FEAT/). We have aligned each sample to a reference configuration to help with the mini-batch OT pairing.
 
 
-### Run FEAT
+### 🏃 Run FEAT
 
 ```
 python main_train.py --config gmm_si > log.txt
@@ -51,15 +51,15 @@ hyparameters can be set in ```config/defaults/your-config.yaml```.
 
 
 
-### Coming soon:
+### 🚧 Coming soon:
 - Code for Half-side interpolant
 
-### Support and Contact
+### 📧 Support and Contact
 If you have any questions, please feel free to reach out at jh2383@cam.ac.uk
 
 
 
-### Reference
+### 📍 Reference
 ```
 @inproceedings{he2025feat,
   title     = {FEAT: Free energy Estimators with Adaptive Transport},
