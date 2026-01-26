@@ -38,7 +38,7 @@ Finally, install bgflow manually from the official repository: [https://github.c
 
 ### 📁 Data preparation
 
-Please put the data in ```data/``` folder.  Along with our code, we also release the dataset we used in our paper at [https://huggingface.co/datasets/JJHE/FEAT/](https://huggingface.co/datasets/JJHE/FEAT/). We have aligned each sample to a reference configuration to help with the mini-batch OT pairing.
+Please put the data in ```data/``` folder.  Along with our code, we also release the dataset we used in our paper at 🤗 [https://huggingface.co/datasets/JJHE/FEAT/](https://huggingface.co/datasets/JJHE/FEAT/). We have aligned each sample to a reference configuration to help with the mini-batch OT pairing.
 
 
 ### 🏃 Run FEAT
