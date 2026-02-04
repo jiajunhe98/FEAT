@@ -48,11 +48,19 @@ For custom datasets, especially for larger systems (ALDP, LJ-128, or larger), yo
 
 ### 🏃 Run FEAT
 
-```
+To train FEAT, run:
+
+```bash
 python main_train.py --config gmm_si > log.txt
 ```
 
-hyparameters can be set in ```config/defaults/your-config.yaml```.
+Hyperparameters can be configured in the YAML files in the `config/` directory. Available configuration files include:
+- `gmm_si.yaml` / `gmm_fm.yaml` - Gaussian mixture model (SI: Schrödinger interpolant, FM: Flow matching)
+- `aldp_si.yaml` / `aldp_fm.yaml` - Alanine dipeptide
+- `lj79_si.yaml` / `lj79_fm.yaml` - Lennard-Jones 79-particle system
+- `phi_si.yaml` - φ⁴ field theory
+
+Default hyperparameter templates are available in `config/defaults/`.
 
 ---
 
