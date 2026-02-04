@@ -46,7 +46,7 @@ For custom datasets, especially for larger systems (ALDP, LJ-128, or larger), yo
 
 ---
 
-### 🏃 Run FEAT
+### 🏃 Run Standard FEAT
 
 To train FEAT, run:
 
