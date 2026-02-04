@@ -38,7 +38,11 @@ Finally, install bgflow manually from the official repository: [https://github.c
 
 ### 📁 Data preparation
 
-Please put the data in ```data/``` folder.  Along with our code, we also release the dataset we used in our paper at 🤗 [https://huggingface.co/datasets/JJHE/FEAT/](https://huggingface.co/datasets/JJHE/FEAT/). We have aligned each sample to a reference configuration to help with the mini-batch OT pairing.
+Place your data files in the `data/` folder. 
+
+We also release the datasets used in our paper on 🤗 [Hugging Face](https://huggingface.co/datasets/JJHE/FEAT/). All samples in these datasets have been pre-aligned to reference configurations to facilitate mini-batch optimal transport (OT) pairing during training.
+
+For custom datasets, especially for larger systems (ALDP, LJ-128, or larger), you may need to align your configurations first. See the alignment scripts in the `data/` folder (`align_rotation.py` and `align_rotation_permute.py`) and the [data folder README](data/readme.md) for more details.
 
 ---
 
@@ -54,7 +58,6 @@ hyparameters can be set in ```config/defaults/your-config.yaml```.
 
 ### 🚧 Coming soon:
 - Code for Half-side interpolant
-- Code for alignment of samples for OT pair
 
 ---
 
