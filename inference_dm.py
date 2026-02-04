@@ -12,7 +12,7 @@ Example usage:
     python inference_dm.py \\
         --model_path checkpoints/ema_net_final.pt \\
         --n_particles 43 \\
-        --data_path data/4A_0.0_align_ot.pt \\
+        --data_path data/4A_0.0_align.pt \\
         --data_scaling 5.0 \\
         --n_samples 1000 \\
         --n_batches 10 \\
@@ -226,7 +226,7 @@ Examples:
   
   # Full inference with data
   python inference_dm.py --model_path checkpoints/ema_net_final.pt --n_particles 43 \\
-      --data_path data/4A_0.0_align_ot.pt --data_scaling 5.0 --n_samples 1000
+      --data_path data/4A_0.0_align.pt --data_scaling 5.0 --n_samples 1000
   
   # Custom sampling parameters
   python inference_dm.py --model_path checkpoints/ema_net_final.pt --n_particles 43 \\
