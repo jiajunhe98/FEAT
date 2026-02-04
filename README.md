@@ -33,13 +33,14 @@ pip install torchcfm
 Finally, install bgflow manually from the official repository: [https://github.com/noegroup/bgflow](https://github.com/noegroup/bgflow).
 
 
-
+---
 
 
 ### 📁 Data preparation
 
 Please put the data in ```data/``` folder.  Along with our code, we also release the dataset we used in our paper at 🤗 [https://huggingface.co/datasets/JJHE/FEAT/](https://huggingface.co/datasets/JJHE/FEAT/). We have aligned each sample to a reference configuration to help with the mini-batch OT pairing.
 
+---
 
 ### 🏃 Run FEAT
 
@@ -49,15 +50,18 @@ python main_train.py --config gmm_si > log.txt
 
 hyparameters can be set in ```config/defaults/your-config.yaml```.
 
-
+---
 
 ### 🚧 Coming soon:
 - Code for Half-side interpolant
+- Code for alignment of samples for OT pair
+
+---
 
 ### 📧 Support and Contact
 If you have any questions, please feel free to reach out at jh2383@cam.ac.uk
 
-
+---
 
 ### 📍 Reference
 ```
