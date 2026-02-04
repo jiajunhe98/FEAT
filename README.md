@@ -64,8 +64,49 @@ Default hyperparameter templates are available in `config/defaults/`.
 
 ---
 
-### 🚧 Coming soon:
-- Code for Half-side interpolant
+### 🏃 Run One-sided FEAT
+
+We provide scripts for training and inference of One-sided FEAT with EDM parametried diffusion models.
+In our paper, we use one-sided FEAT for alanine tetrapeptide and Chignolin.
+
+#### Training
+
+To train the model:
+
+```bash
+# Basic training
+python train_dm.py --data_path data/data.pt --n_particles 43
+
+# Full training with custom parameters
+python train_dm.py \
+    --data_path data/data.pt \
+    --n_particles 43 \
+    --data_scaling 5.0 \
+    --n_epochs 100000 \
+    --batch_size 20 \
+    --lr 1e-4 \
+    --save_dir ./checkpoints
+```
+
+#### Inference with Jarzynski Equality
+
+To estimate free energy differences using the trained model:
+
+```bash
+# Basic inference (reverse path only)
+python inference_dm.py --data_path data/data.pt --model_path checkpoints/ema_net_final.pt --n_particles 43
+
+# Full inference with forward and reverse paths
+python inference_dm.py \
+    --model_path checkpoints/ema_net_final.pt \
+    --n_particles 43 \
+    --data_path data/data.pt \
+    --data_scaling 5.0 \
+    --n_samples 100 \
+    --n_batches 10
+```
+
+For more details, see the docstrings in `train_dm.py` and `inference_dm.py`.
 
 ---
 
