@@ -6,11 +6,11 @@ an EGNN-based denoising network with exponential moving average (EMA).
 
 Example usage:
     # Basic training with required arguments
-    python train_dm.py --data_path data/4A_1.0_align_ot.pt --n_particles 43
+    python train_dm.py --data_path data/4A_1.0_align.pt --n_particles 43
     
     # Full example with all parameters (matching notebook defaults)
     python train_dm.py \\
-        --data_path data/4A_1.0_align_ot.pt \\
+        --data_path data/4A_1.0_align.pt \\
         --n_particles 43 \\
         --data_scaling 5.0 \\
         --n_epochs 100000 \\
@@ -23,7 +23,7 @@ Example usage:
     
     # Resume training from checkpoint
     python train_dm.py \\
-        --data_path data/4A_1.0_align_ot.pt \\
+        --data_path data/4A_1.0_align.pt \\
         --n_particles 43 \\
         --resume checkpoints/ema_net_epoch_50000.pt
 """
@@ -219,7 +219,7 @@ def main():
     Main training function.
     
     Example command:
-        python train_dm.py --data_path data/4A_1.0_align_ot.pt --n_particles 43
+        python train_dm.py --data_path data/4A_1.0_align.pt --n_particles 43
     """
     parser = argparse.ArgumentParser(
         description='Train diffusion model with DSM loss',
@@ -227,14 +227,14 @@ def main():
         epilog="""
 Examples:
   # Basic training
-  python train_dm.py --data_path data/4A_1.0_align_ot.pt --n_particles 43
+  python train_dm.py --data_path data/4A_1.0_align.pt --n_particles 43
   
   # Full training with custom parameters
-  python train_dm.py --data_path data/4A_1.0_align_ot.pt --n_particles 43 \\
+  python train_dm.py --data_path data/4A_1.0_align.pt --n_particles 43 \\
       --n_epochs 100000 --batch_size 20 --lr 1e-4 --save_dir ./checkpoints
   
   # Resume from checkpoint
-  python train_dm.py --data_path data/4A_1.0_align_ot.pt --n_particles 43 \\
+  python train_dm.py --data_path data/4A_1.0_align.pt --n_particles 43 \\
       --resume checkpoints/ema_net_epoch_50000.pt
         """
     )
