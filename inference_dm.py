@@ -28,6 +28,7 @@ import torch
 import torch.nn as nn
 
 from networks.egnn import EGNN_dynamics_AD4, remove_mean
+from energy.a4 import A4
 
 
 def em_solve_reverse(model, start_samples, ts, n_particles, verbose=False):
@@ -305,6 +306,9 @@ Examples:
         data = torch.load(args.data_path) * args.data_scaling
         print(f'Data shape: {data.shape}')
     
+    ##### TODO: change to the actual energy function
+    energy = A4(300, 'cuda', scaling=args.data_scaling, sample_path=args.data_path, score_path=args.data_path.replace('.pt', '_grad.pkl'), lamb=0, device=device)
+
     # Initialize model (architecture must match training)
     print('Initializing model...')
     # We need data_std for model initialization, use a default or load from checkpoint
@@ -359,7 +363,7 @@ Examples:
         
         # Note: For full free energy, you would add target.log_prob(samples) here
         # but that requires a target distribution object
-        # W += target.log_prob(samples)
+        W += energy.log_prob(samples)
         
         W1s.append(W.flatten())
     
@@ -388,7 +392,7 @@ Examples:
             W += torch.distributions.Normal(0, ts[-1]).log_prob(samples).sum(-1)
             
             # Note: For full free energy, you would subtract target.log_prob(start_samples) here
-            # W -= target.log_prob(start_samples)
+            W -= energy.log_prob(start_samples)
             
             W2s.append(W.flatten())
         
