@@ -67,7 +67,7 @@ Default hyperparameter templates are available in `config/defaults/`.
 ### 🏃 Run One-sided FEAT
 
 We provide scripts for training and inference of One-sided FEAT with EDM parametried diffusion models.
-In our paper, we use one-sided FEAT for alanine tetrapeptide and Chignolin.
+In our paper, we use one-sided FEAT for alanine tetrapeptide and Chignolin at 300K.
 
 #### Training
 
