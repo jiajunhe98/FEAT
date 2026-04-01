@@ -111,7 +111,7 @@ For more details, see the docstrings in `train_dm.py` and `inference_dm.py`.
 ---
 
 ### 📧 Support and Contact
-If you have any questions, please feel free to reach out at jh2383@cam.ac.uk
+If you have any questions, please feel free to reach out at jh2383@cam.ac.uk and yuanqidu.personal@gmail.com
 
 ---
 
