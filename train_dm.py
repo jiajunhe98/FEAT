@@ -38,7 +38,7 @@ import torch
 import torch.nn as nn
 from tqdm import tqdm
 
-from networks.egnn import EGNN_dynamics_AD4, remove_mean
+from networks.dm_net import EGNN_dynamics_AD4, remove_mean
 
 
 def dsm_loss(x_t, model, x0, t):
