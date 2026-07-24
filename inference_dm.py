@@ -27,7 +27,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from networks.egnn import EGNN_dynamics_AD4, remove_mean
+from networks.dm_net import EGNN_dynamics_AD4, remove_mean
 from energy.a4 import A4
 
 
