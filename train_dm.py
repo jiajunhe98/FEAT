@@ -38,7 +38,7 @@ import torch
 import torch.nn as nn
 from tqdm import tqdm
 
-from networks.dm_net import EGNN_dynamics_AD4, remove_mean
+from networks.dm_net import EGNN_dynamics_EDM, remove_mean
 
 
 def dsm_loss(x_t, model, x0, t):
@@ -324,7 +324,7 @@ Examples:
     
     # Initialize model
     print('Initializing model...')
-    denoising_net = EGNN_dynamics_AD4(
+    denoising_net = EGNN_dynamics_EDM(
         n_particles=args.n_particles,
         n_dimension=3,
         hidden_nf=args.hidden_nf,
