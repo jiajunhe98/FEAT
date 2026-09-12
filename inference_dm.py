@@ -27,7 +27,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from networks.dm_net import EGNN_dynamics_AD4, remove_mean
+from networks.dm_net import EGNN_dynamics_EDM, remove_mean
 from energy.a4 import A4
 from energy.chig import Chignolin
 
@@ -328,7 +328,7 @@ Examples:
     data_std = args.data_sigma if args.data_sigma is not None else remove_mean(data, args.n_particles, 3).std().item()
     print(f'data_sigma: {data_std:.4f}')
     
-    model = EGNN_dynamics_AD4(
+    model = EGNN_dynamics_EDM(
         n_particles=args.n_particles,
         n_dimension=3,
         hidden_nf=args.hidden_nf,

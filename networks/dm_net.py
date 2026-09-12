@@ -144,7 +144,7 @@ class ScoreNet(EGNN_dynamics):
     
 
 
-class EGNN_dynamics_AD4(nn.Module):
+class EGNN_dynamics_EDM(nn.Module):
     def __init__(self, n_particles, n_dimension, hidden_nf=64, device='cpu',
             act_fn=torch.nn.SiLU(), n_layers=4, recurrent=True, attention=False,
                  condition_time=True, tanh=False, mode='egnn_dynamics', agg='sum', data_sigma=1.0, c_noise=False):
@@ -253,6 +253,11 @@ class EGNN_dynamics_AD4(nn.Module):
     
 
     
+
+
+# Kept so existing scripts and notebooks keep importing. The class was named for
+# alanine dipeptide, but it is system-agnostic: atom types follow n_particles.
+EGNN_dynamics_AD4 = EGNN_dynamics_EDM
 
 class PositionalEmbedding(torch.nn.Module):
     def __init__(self, num_channels, max_positions=10000, endpoint=False):
