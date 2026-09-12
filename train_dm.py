@@ -258,6 +258,8 @@ Examples:
                         help='Use attention in EGNN')
     parser.add_argument('--tanh', action='store_true', default=True,
                         help='Use tanh activation')
+    parser.add_argument('--c_noise', action='store_true',
+                        help='Feed the network EDM c_noise = log(t)/4 instead of the raw t')
     
     # Training arguments
     parser.add_argument('--n_epochs', type=int, default=100000,
@@ -313,8 +315,11 @@ Examples:
     
     # Load data
     print(f'Loading data from {args.data_path}...')
-    data = torch.load(args.data_path) * args.data_scaling
-    data_std = data.std().item()
+    data = torch.load(args.data_path, map_location='cpu') * args.data_scaling
+    # the model only ever sees mean-free coordinates, so data_sigma has to be
+    # measured there too -- 4A_*_align.pt is aligned but NOT centred, and its raw
+    # std is 1.79x the mean-free one
+    data_std = remove_mean(data, args.n_particles, 3).std().item()
     print(f'Data shape: {data.shape}, std: {data_std:.4f}')
     
     # Initialize model
@@ -332,7 +337,8 @@ Examples:
         tanh=args.tanh,
         mode='egnn_dynamics',
         agg='sum',
-        data_sigma=data_std
+        data_sigma=data_std,
+        c_noise=args.c_noise
     ).to(device)
     
     # Initialize EMA model

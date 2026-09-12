@@ -75,11 +75,14 @@ To train the model:
 
 ```bash
 # Basic training
-python train_dm.py --data_path data/data.pt --n_particles 43
+python train_dm.py --data_path data/4A_1.0_align.pt --n_particles 43
+
+# Chignolin is the same script with 175 particles
+python train_dm.py --data_path data/chignolin_1.0_align.pt --n_particles 175
 
 # Full training with custom parameters
 python train_dm.py \
-    --data_path data/data.pt \
+    --data_path data/4A_1.0_align.pt \
     --n_particles 43 \
     --data_scaling 5.0 \
     --n_epochs 100000 \
@@ -94,17 +97,29 @@ To estimate free energy differences using the trained model:
 
 ```bash
 # Basic inference (reverse path only)
-python inference_dm.py --data_path data/data.pt --model_path checkpoints/ema_net_final.pt --n_particles 43
+python inference_dm.py --data_path data/4A_0.0_align.pt --model_path checkpoints/ema_net_final.pt --n_particles 43
 
 # Full inference with forward and reverse paths
 python inference_dm.py \
     --model_path checkpoints/ema_net_final.pt \
     --n_particles 43 \
-    --data_path data/data.pt \
+    --data_path data/4A_0.0_align.pt \
     --data_scaling 5.0 \
     --n_samples 100 \
     --n_batches 10
+
+# Chignolin, and a target at the other end of the lambda path
+python inference_dm.py \
+    --model_path checkpoints/ema_net_final.pt \
+    --system chig --n_particles 175 --lamb 1.0 \
+    --data_path data/chignolin_1.0_align.pt \
+    --data_sigma 2.01634
 ```
+
+`data_sigma` is the EDM preconditioning scale and is **not** stored in the
+checkpoint. It defaults to the std of `--data_path`, which is only right when
+inference uses the data the model was trained on; otherwise pass the value
+`train_dm.py` printed as `std` (2.01634 for `chignolin_1.0_align.pt`).
 
 For more details, see the docstrings in `train_dm.py` and `inference_dm.py`.
 

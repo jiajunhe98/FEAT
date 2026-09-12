@@ -20,7 +20,7 @@ class Chignolin(nn.Module):
         self.device = torch.device(device)  # Set device
         
         # System setup
-        dataset = ChignolinOBC2PT(read=True, download=False)
+        dataset = ChignolinOBC2PT(read=False, download=False)
         self.system = dataset._system
         
         for force in self.system.system.getForces():
