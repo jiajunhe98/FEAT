@@ -29,6 +29,7 @@ import torch.nn as nn
 
 from networks.dm_net import EGNN_dynamics_AD4, remove_mean
 from energy.a4 import A4
+from energy.chig import Chignolin
 
 
 def em_solve_reverse(model, start_samples, ts, n_particles, verbose=False):
@@ -246,6 +247,12 @@ Examples:
                         help='Path to data file for forward path (optional)')
     parser.add_argument('--data_scaling', type=float, default=5.0,
                         help='Scaling factor for data (default: 5.0)')
+    parser.add_argument('--system', type=str, default='a4',
+                        help='Target system, a4 or chig (default: a4)')
+    parser.add_argument('--lamb', type=float, default=0.0,
+                        help='Lambda of the target, 0 is vacuum and 1 is implicit solvent (default: 0.0)')
+    parser.add_argument('--n_threads', type=int, default=8,
+                        help='Number of OpenMM workers, chig only (default: 8)')
     
     # Model arguments (must match training)
     parser.add_argument('--hidden_nf', type=int, default=256,
@@ -258,6 +265,10 @@ Examples:
                         help='Use attention in EGNN')
     parser.add_argument('--tanh', action='store_true', default=True,
                         help='Use tanh activation')
+    parser.add_argument('--c_noise', action='store_true',
+                        help='Feed the network EDM c_noise = log(t)/4 instead of the raw t')
+    parser.add_argument('--data_sigma', type=float, default=None,
+                        help='data_sigma used for training (default: std of --data_path)')
     
     # Sampling arguments
     parser.add_argument('--n_samples', type=int, default=100,
@@ -303,17 +314,19 @@ Examples:
     data = None
     if args.data_path and os.path.exists(args.data_path):
         print(f'Loading data from {args.data_path}...')
-        data = torch.load(args.data_path) * args.data_scaling
+        data = torch.load(args.data_path, map_location='cpu') * args.data_scaling
         print(f'Data shape: {data.shape}')
     
-    ##### TODO: change to the actual energy function
-    energy = A4(300, 'cuda', scaling=args.data_scaling, sample_path=args.data_path, score_path=args.data_path.replace('.pt', '_grad.pkl'), lamb=0, device=device)
+    if args.system == 'a4':
+        energy = A4(300, device, scaling=args.data_scaling, lamb=args.lamb, sample_path=args.data_path)
+    else:
+        energy = Chignolin(300, device, lamb=args.lamb, scaling=args.data_scaling, n_threads=args.n_threads)
 
     # Initialize model (architecture must match training)
     print('Initializing model...')
-    # We need data_std for model initialization, use a default or load from checkpoint
-    # For inference, we'll use a placeholder and load the actual weights
-    data_std = 1.0  # Will be overridden by loaded model weights
+    # data_sigma is not part of the state dict, so it has to be given the value used for training
+    data_std = args.data_sigma if args.data_sigma is not None else remove_mean(data, args.n_particles, 3).std().item()
+    print(f'data_sigma: {data_std:.4f}')
     
     model = EGNN_dynamics_AD4(
         n_particles=args.n_particles,
@@ -328,7 +341,8 @@ Examples:
         tanh=args.tanh,
         mode='egnn_dynamics',
         agg='sum',
-        data_sigma=data_std
+        data_sigma=data_std,
+        c_noise=args.c_noise
     ).to(device)
     
     # Load model weights

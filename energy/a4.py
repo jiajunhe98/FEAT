@@ -140,7 +140,6 @@ class A4(nn.Module):
         print('sample size:', self.sample_data.shape)
 
         self.sample_data = self.sample_data
-        self.scores = self.scores
 
     def norm_energy(self, x: torch.Tensor):
         E = SerialOpenMMEnergy.apply(x.to(self.device),

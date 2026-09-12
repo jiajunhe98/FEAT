@@ -147,12 +147,12 @@ class ScoreNet(EGNN_dynamics):
 class EGNN_dynamics_AD4(nn.Module):
     def __init__(self, n_particles, n_dimension, hidden_nf=64, device='cpu',
             act_fn=torch.nn.SiLU(), n_layers=4, recurrent=True, attention=False,
-                 condition_time=True, tanh=False, mode='egnn_dynamics', agg='sum', data_sigma=1.0):
+                 condition_time=True, tanh=False, mode='egnn_dynamics', agg='sum', data_sigma=1.0, c_noise=False):
         super().__init__()
         self.mode = mode
         # Initial one hot encoding of the different element types for ALDP
         # following TBG code
-        atom_types = torch.arange(43)
+        atom_types = torch.arange(n_particles)
         # atom_types[[0, 2, 3]] = 2
         # atom_types[[19, 20, 21]] = 20
         # atom_types[[11, 12, 13]] = 12
@@ -178,6 +178,9 @@ class EGNN_dynamics_AD4(nn.Module):
         self.counter = 0
 
         self.data_sigma = data_sigma
+        # EDM feeds log(t)/4 to the network, not t.  Off by default: the released
+        # checkpoints were trained on the raw t and only load with c_noise=False.
+        self.c_noise = c_noise
         # self.time_embed = PositionalEmbedding(32)
         
     def _forward(self, input_array, time_array, *args, **kwargs):
@@ -242,7 +245,8 @@ class EGNN_dynamics_AD4(nn.Module):
     def forward(self, input_array, time_array, *args, **kwargs):
         c_in = 1 / (self.data_sigma**2 + time_array[:, None]**2)**0.5
         input_array = remove_mean(input_array, self._n_particles, self._n_dimension)
-        out =  remove_mean(self._forward(input_array * c_in, time_array, *args, **kwargs), self._n_particles, self._n_dimension)
+        t = time_array.log() / 4 if self.c_noise else time_array
+        out =  remove_mean(self._forward(input_array * c_in, t, *args, **kwargs), self._n_particles, self._n_dimension)
         c_skip = self.data_sigma**2 / (self.data_sigma**2 + time_array[:, None]**2)
         c_out = self.data_sigma*time_array[:, None] / (self.data_sigma**2 + time_array[:, None]**2)**0.5
         return input_array * c_skip + out * c_out
